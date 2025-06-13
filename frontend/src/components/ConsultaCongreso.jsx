@@ -1,8 +1,4 @@
-import { Link } from 'react-router-dom';
-
-function ConsultaCongreso () {
-  return (
-    <h2>Consulta Congreso</h2>
-  )}
-
-  export default ConsultaCongreso;
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Select from "react-select"
+import { Link } from "react-router-dom";

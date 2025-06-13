@@ -168,6 +168,11 @@ select, input {
 
 /* ========== Site Styles ========== */
 
+.pendiente{
+  background-color:burlywood;
+}
+
+
 .error {
   color: #dc2626;
   font-size: 0.9rem;

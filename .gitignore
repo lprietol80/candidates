@@ -1,0 +1,23 @@
+# Ignorar la carpeta "notes"
+notes/
+the_database/
+
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.env
+
+
+# React
+/build
+/public
+
+# OS
+.DS_Store  # MacOS
+Thumbs.db  # Windows
+
+# Logs
+*.log

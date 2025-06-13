@@ -1,0 +1,102 @@
+/* ========== CSS Reset ========== */
+
+/* Mobile-First CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Base font size for rem units, optimized for mobile */
+  font-size: 16px;
+  /* Improve text rendering */
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  /* Smooth scrolling for touch devices */
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color:var(--background);
+  /* Default mobile-friendly font and line height */
+  line-height: 1.6;
+  /* Ensure full height for mobile viewports */
+  min-height: 100vh;
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
+}
+
+a {
+  /* Remove default styling */
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.4 ease-in-out;
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /* Normalize headings for mobile */
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+img, picture, video, canvas, svg {
+  /* Responsive images for mobile */
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  /* Inherit font styles for consistency */
+  font: inherit;
+  /* Remove default browser styling */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Ensure touch-friendly sizing */
+  padding: 0.5em;
+}
+
+p {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+table {
+  /* Collapse borders for cleaner mobile tables */
+  border-collapse: collapse;
+}
+
+ul, ol {
+  /* Remove list styles */
+  list-style: none;
+}
+
+
+
+/* Progressive enhancements for larger screens */
+@media (min-width: 640px) {
+  html {
+    /* Increase base font size for tablets */
+    font-size: 18px;
+  }
+
+
+}
+
+@media (min-width: 1024px) {
+  html {
+    /* Further adjust font size for desktops */
+    font-size: 20px;
+  }
+}

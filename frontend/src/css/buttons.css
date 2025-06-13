@@ -1,0 +1,71 @@
+
+/* Estilo base para todos los botones */
+.button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Botón primario (amarillo) */
+.button-primary {
+  background-color: var(--primary);
+  color: var(--text-secondary);
+}
+
+.button-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.button-primary:focus {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+
+/* Botón secundario (azul) */
+.button-secondary {
+  background-color: var(--secondary);
+  color: var(--background);
+}
+
+.button-secondary:hover {
+  background-color: var(--secondary-light);
+  transform: translateY(-1px);
+}
+
+.button-secondary:focus {
+  outline: 2px solid var(--secondary-light);
+  outline-offset: 2px;
+}
+
+/* Botón terciario (rojo) */
+.button-tertiary {
+  background-color: var(--tertiary);
+  color: var(--background);
+}
+
+.button-tertiary:hover {
+  background-color: var(--tertiary-dark);
+  transform: translateY(-1px);
+}
+
+.button-tertiary:focus {
+  outline: 2px solid var(--tertiary-dark);
+  outline-offset: 2px;
+}
+
+/* Estado deshabilitado para todos los botones */
+.button:disabled {
+  background-color: var(--accent-light);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  transform: none;
+}

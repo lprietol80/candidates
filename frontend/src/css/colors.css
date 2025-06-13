@@ -1,0 +1,26 @@
+:root {
+  /* Colores primarios (basados en la bandera de Colombia) */
+  --primary: #FFC107; /* Amarillo vibrante para botones y destacados */
+  --primary-alpha :#ffc10775;
+  --primary-dark: #FFA000; /* Variación más oscura para hover */
+  --secondary: #003087; /* Azul profundo para fondos y navegación */
+  --secondary-light: #1E88E5; /* Variación más clara para contraste */
+  --tertiary: #CE1126; /* Rojo para acentos y detalles */
+  --tertiary-dark: #B71C1C; /* Rojo más oscuro para hover */
+
+  /* Colores complementarios (inspirados en Colombia) */
+  --green-emerald: #2E7D32; /* Verde para fondos secundarios */
+  --coffee-brown: #4A2C2A; /* Marrón café para textos o detalles */
+  
+  /* Colores neutros para fondos y textos */
+  --background: #F5F5F5; /* Fondo claro para secciones principales */
+  --text-primary: #4A2C2A; /* Texto principal (marrón oscuro) */
+  --text-secondary: #212121; /* Texto secundario (gris oscuro) */
+  --accent-light: #E0E0E0; /* Gris claro para bordes o fondos secundarios */
+  --error: #D32F2F; /* Rojo intenso para alertas y errores */
+
+  /* tamaños */
+
+  --max-width:1280px;
+  --header-height:5rem;
+}

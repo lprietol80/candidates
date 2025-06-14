@@ -141,7 +141,7 @@ router.get('/circunscripciones',async (req,res)=>{
   try {
     connection = await getConnection();
     const [rows] = await connection.query(`
-      SELECT Nombre as Departamento, Tipo FROM Circunscripciones
+      SELECT ID_Circunscripcion, Nombre as Departamento, Tipo FROM Circunscripciones
       `)
       res.json(rows);
   } catch (error) {
@@ -161,7 +161,7 @@ router.get('/tiposeleccion', async (req,res)=>{
   try {
     connection = await getConnection();
     const [rows] = await connection.query(
-      'SELECT Nombre As Elecciones FROM TiposEleccion'
+      'SELECT ID_TipoEleccion, Nombre As Elecciones FROM TiposEleccion'
     );
     res.json(rows)
     

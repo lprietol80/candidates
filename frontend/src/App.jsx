@@ -8,6 +8,7 @@ import './css/reset.css'; // Primero, para normalizar estilos
 import './css/colors.css'; // Segundo, para definir variables
 import './css/buttons.css'; // Tercero, para estilos de botones
 import './css/styles.css'; // Cuarto, para estilos generales
+import Error from './components/Error';
 
 
 function App() {
@@ -24,7 +25,6 @@ function App() {
           <Route path="/candidato/:id" element={<DetalleCandidato />} />
         </Routes>
       </main>
-
     </Router>
   );
 }

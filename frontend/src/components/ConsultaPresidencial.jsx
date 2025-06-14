@@ -12,7 +12,7 @@ function ConsultaPresidencial() {
   useEffect(() => {
     const fetchCandidatos = async () => {
       try {
-        const response = await axios.get('/api/candidatos/presidenciales');
+        const response = await axios.get("/api/candidatos/presidenciales");
         setCandidatos(response.data);
         setSearchOptions(
           response.data.map((c) => ({
@@ -58,11 +58,11 @@ function ConsultaPresidencial() {
       {error && <p className="error">{error}</p>}
       <div className="candidato-grid">
         {candidatos.map((candidato) => (
-          <article key={candidato.ID_Candidato} className="candidato-card">
+          <article key={candidato.ID_candidato} className="candidato-card">
             <h3>{candidato.Nombre}</h3>
             <p><strong>Partido:</strong> {candidato.Partido}</p>
             <p><strong>Corriente:</strong> {candidato.Corriente}</p>
-            <Link to={`/candidato/${candidato.ID_Candidato}`}>Ver Detalles</Link>
+            <Link to={`/candidato/${candidato.ID_candidato}`}>Ver Detalles</Link>
           </article>
         ))}
       </div>

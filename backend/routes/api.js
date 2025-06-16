@@ -1,12 +1,13 @@
 import express from "express";
 import { getConnection } from '../config/db.js';
-//import { getOpenAIinfo } from "../config/llmService.js"
 import { getGrokinfo } from "../config/llmService.js"
+import axios from "axios";
+import dotenv from "dotenv";
+
+dotenv.config()
 
 
 const router = express.Router()
-
-
 
 // --- Obtener candidatos presidenciales ---
 
@@ -34,7 +35,7 @@ router.get('/candidatos/presidenciales', async(req,res)=>{
 
 // --- Obtener candidatos al Congreso por tipo y circunscripción ---
 router.get('/candidatos/congreso',async (req,res)=>{
-  let connection
+  let connection;
   try {
     const {tipoEleccion,idCircunscripcion}=req.query;
     if(!tipoEleccion){
@@ -65,7 +66,7 @@ router.get('/candidatos/congreso',async (req,res)=>{
 // --- Búsqueda de candidatos por nombre (para autocompletado) ---
 
 router.get('/candidatos/buscar', async (req,res)=>{
-  let connection
+  let connection;
   try {
     const {nombre } = req.query;
     if(!nombre){
@@ -89,17 +90,20 @@ router.get('/candidatos/buscar', async (req,res)=>{
   }
 })
 
-// --- Detalles de un candidato (con LLM) ---
+// --- Detalles de un candidato (con LLM ycaché) ---
 router.get('/candidatos/:id', async (req,res)=>{
   let connection;
   try {
     const {id } = req.params;
     connection= await getConnection();
+
+    // Obtener información del candidato
     const [rows] = await connection.query(`
-      select c.Nombre,p.Nombre as Partido,cp.Nombre as Corriente
+      select c.Nombre,p.Nombre as Partido,cp.Nombre as Corriente,ll.InformacionAdicional
       from candidatos c
       join partidospoliticos p on c.ID_Partido = p.ID_Partido
       join corrientespoliticas cp on p.ID_Corriente  =cp.ID_Corriente
+      join llmcache ll on c.ID_Candidato = ll.ID_Candidato
       where c.ID_Candidato = ?`, [id]);
 
       if (rows.length===0) {
@@ -107,42 +111,59 @@ router.get('/candidatos/:id', async (req,res)=>{
       }
 
       const candidato = rows[0];
- 
-      //llm Grok
-      const grokInfo = await getGrokinfo(candidato.Nombre);
-      if (grokInfo) {
-        return res.json({...candidato,grokInfo})
-      } else{
-        return res.json({ ...candidato, info: "No hay datos disponibles de los modelos LLM" });
-      }
 
-      // //llm OpenAi
-      // const openAiInfo = await getOpenAIinfo(candidato.Nombre);
-      // if (openAiInfo){
-      //   return res.json({...candidato,openAiInfo})
-      // }else{
-      //   return res.json({ ...candidato, info: "No hay datos disponibles de los modelos LLM" });
-      // };
+      // Verificar caché
+      const cacheExpirationHours = process.env.CACHE_EXPIRATION_HOURS || 24;// Tiempo de expiración del caché (24 horas)
+      const [cacheRows] = await connection.query(`
+        SELECT InformacionAdicional, FechaActualizacion
+        FROM LlmCache
+        WHERE ID_Candidato = ?
+        AND FechaActualizacion >= DATE_SUB(NOW(), INTERVAL ? HOUR)
+        `,[id,cacheExpirationHours]);
 
+        let llmInfo;
+        if (cacheRows.length > 0) {
+          // Usar información cacheada
+          llmInfo = cacheRows[0].InformacionAndicional;
+        } else {
+          try {
+            // Llamar al LLM
+            llmInfo = await getGrokinfo(candidato.Nombre)
+            console.log("Luis,respuesta del LLM ==>", llmInfo)
+            //Guardar en caché (usar transacción para consistencia)
+            await connection.beginTransaction();
+            await connection.query(`
+              INSERT INTO llmcache (ID_Candidato, 
+              InformacionAdicional, FechaActualizacion)
+              VALUES (?, ?, NOW())
+              ON DUPLICATE KEY UPDATE InformacionAdicional = ?,
+              FechaActualizacion = NOW()
+              `,[id,llmInfo,llmInfo]);
+              await connection.commit();
+          } catch (llmError) {
+            console.error('Error al consultar LLM:', llmError.message);
+            llmInfo = "Información no disponible"
+            if (connection) await connection.rollback();
+          }
+        }
+        res.json({...candidato,InformacionAndicional:llmInfo});
   } catch (error) {
     console.error("Error al obtener detalles del candidato:", error.message);
     res.status(500).json({ error: "Error en el servidor" });
   }finally{
     if (connection) connection.release();
   }
-
-})
-
+});
 
 // --- Obtener circunscripciones ---
 
 router.get('/circunscripciones',async (req,res)=>{
-  let connection
+  let connection;
   try {
     connection = await getConnection();
     const [rows] = await connection.query(`
       SELECT ID_Circunscripcion, Nombre as Departamento, Tipo FROM Circunscripciones
-      `)
+      `);
       res.json(rows);
   } catch (error) {
     console.error('Error al obtener circunscripciones:', error.message);
@@ -153,16 +174,13 @@ router.get('/circunscripciones',async (req,res)=>{
 
 })
 
-
-
 // --- Obtener tipos de elección ---
 router.get('/tiposeleccion', async (req,res)=>{
-  let connection
+  let connection;
   try {
     connection = await getConnection();
     const [rows] = await connection.query(
-      'SELECT ID_TipoEleccion, Nombre As Elecciones FROM TiposEleccion'
-    );
+      "SELECT ID_TipoEleccion, Nombre As Elecciones FROM TiposEleccion");
     res.json(rows)
     
   } catch (error) {
@@ -174,14 +192,7 @@ router.get('/tiposeleccion', async (req,res)=>{
 
   }
 
-
 })
-
-
-
-
-
-
 
 
 // --- Partidos Políticos ---

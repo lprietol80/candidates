@@ -32,10 +32,11 @@ function DetalleCandidato() {
         <h3>{candidato.Nombre}</h3>
         <p><strong>Partido:</strong>{candidato.Partido}</p>
         <p><strong>Corriente:</strong>{candidato.Corriente}</p>
-        <p><strong>Información Adicional:</strong> {candidato.InformacionAdicional}</p>
+
+        <p><strong>Información Adicional:</strong>{candidato.InformacionAdicional}</p>
         <div>
-          <Link to="/congreso" className="text-blue-600">Volver a Candidatos al Congreso</Link>
-          <Link to="/presidencial" className="text-blue-600"> Ir a Candidatos Presidenciales</Link>
+          <Link to="/congreso" className="text-blue-600">Ver Candidatos al Congreso</Link>
+          <Link to="/presidencial" className="text-blue-600"> Ver Candidatos Presidenciales</Link>
 
         </div>
 

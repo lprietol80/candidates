@@ -29,9 +29,13 @@ function DetalleCandidato() {
     <section aria-labelledby="detalle-candidato-title" className="pendiente">
       <h2 id="detalle-candidato-title">Detalles del Candidato</h2>
       <article className="candidato-card">
+        <div className="candidato-img">
+          <img src={candidato.foto} alt="" />
+        </div>
         <h3>{candidato.Nombre}</h3>
         <p><strong>Partido:</strong>{candidato.Partido}</p>
         <p><strong>Corriente:</strong>{candidato.Corriente}</p>
+        <p><strong>Candidato a:</strong> {candidato.Eleccion}</p>
 
         <p><strong>Información Adicional:</strong>{candidato.InformacionAdicional}</p>
         <div>

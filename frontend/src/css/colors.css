@@ -16,6 +16,7 @@
   --background: #F5F5F5; /* Fondo claro para secciones principales */
   --text-primary: #4A2C2A; /* Texto principal (marrón oscuro) */
   --text-secondary: #212121; /* Texto secundario (gris oscuro) */
+  --text-bg-alpha:#21212130;
   --accent-light: #E0E0E0; /* Gris claro para bordes o fondos secundarios */
   --error: #D32F2F; /* Rojo intenso para alertas y errores */
 

@@ -78,7 +78,7 @@ function ConsultaCongreso() {
   }, [tipoEleccion, circunscripcion]);
 
   return(
-    <section aria-labelledby="congreso-title" className="pendiente">
+    <section aria-labelledby="congreso-title" className="candidatos">
       <h2 id="congreso-title">Consulta Candidatos al Congreso</h2>
       <form >
         <Select
@@ -88,6 +88,7 @@ function ConsultaCongreso() {
           placeholder="Selecciona Cámara o Senado"
           isClearable
           aria-label="Seleccionar tipo de elección"
+          className="search-select"
         />
         <Select
           options={circunscripcionesFiltradas}
@@ -99,16 +100,21 @@ function ConsultaCongreso() {
           isClearable
           isDisabled={!tipoEleccion} // Deshabilitar si no hay tipo seleccionado
           aria-label="Seleccionar circunscripción"
+          className="search-select"
         />
       </form>
       <div className="candidato-grid">
         {candidatos.map((candidato)=>(
-          <article key={candidato.ID_Candidato} className="candidato-card">
+          <article key={candidato.ID_Candidato || selectedCandidato.value} className="candidato-card">
+            <div className="candidato-img">
+              <img src={candidato.foto} alt="" />
+            </div>
             <h3>{candidato.Nombre}</h3>
             <p><strong>Partido:</strong> {candidato.Partido}</p>
             <p><strong>Corriente:</strong> {candidato.Corriente}</p>
+            <p><strong>Candidato a:</strong> {candidato.Eleccion}</p>
             <p><strong>Circunscripción:</strong> {candidato.Circunscripcion}</p>
-            <Link to={`/candidato/${candidato.ID_Candidato}`}>
+            <Link to={`/candidato/${candidato.ID_Candidato || selectedCandidato.value}`}>
               Ver Detalles
             </Link>
           </article>

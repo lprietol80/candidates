@@ -32,7 +32,7 @@ a {
   /* Remove default styling */
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.4 ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 
 a:hover {
@@ -63,7 +63,7 @@ input, button, textarea, select {
   -webkit-appearance: none;
   -moz-appearance: none;
   /* Ensure touch-friendly sizing */
-  padding: 0.5em;
+  padding: 0.5rem;
 }
 
 p {

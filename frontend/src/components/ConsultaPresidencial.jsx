@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
+import Error from './Error';
 
 function ConsultaPresidencial() {
   const [candidatos, setCandidatos] = useState([]);
@@ -21,10 +22,11 @@ function ConsultaPresidencial() {
           }))
         );
       } catch (error) {
-        console.error('Error al obtener candidatos:', error);
+        setError(`Error al obtener los candidatos: ${error.message}`);
       }
     };
     fetchCandidatos();
+
   }, []);
 
   const handleSearch = async (selectedOption) => {
@@ -44,25 +46,33 @@ function ConsultaPresidencial() {
   };
 
   return (
-    <section aria-labelledby="presidencial-title" className='pendiente'>
+    <section aria-labelledby="presidencial-title" className='candidatos'>
       <h2 id="presidencial-title">Consulta Candidatos Presidenciales</h2>
-      <form>
+      <form className="presidenciales">
         <Select
           options={searchOptions}
           onChange={handleSearch}
           placeholder="Buscar candidato por nombre..."
           isClearable
           aria-label="Buscar candidato presidencial"
+          className="search-select"
         />
       </form>
-      {error && <p className="error">{error}</p>}
+
+      {error && <Error message ={error}/>}
+      
       <div className="candidato-grid">
         {candidatos.map((candidato) => (
-          <article key={candidato.ID_candidato} className="candidato-card">
+          <article key={candidato.ID_Candidato || selectedCandidato.value} className="candidato-card">
+            <div className="candidato-img">
+              <img src={candidato.foto} alt="" />
+            </div>
             <h3>{candidato.Nombre}</h3>
             <p><strong>Partido:</strong> {candidato.Partido}</p>
             <p><strong>Corriente:</strong> {candidato.Corriente}</p>
-            <Link to={`/candidato/${candidato.ID_candidato}`}>Ver Detalles</Link>
+            <p><strong>Candidato a:</strong> {candidato.Eleccion}</p>
+            
+            <Link to={`/candidato/${candidato.ID_Candidato || selectedCandidato.value}`}>Ver Detalles</Link>
           </article>
         ))}
       </div>

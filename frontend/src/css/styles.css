@@ -4,30 +4,140 @@ Reset o normalización CSS,Tipografía global,Estilos base (body, html, etc.) */
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 
+
+
+/* ========== Site Styles ========== */
+
 body {
   font-family: "ubuntu", system-ui, -apple-system, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   max-width: var(--max-width);
   margin: 0 auto;
   padding: .3rem;
 }
+
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 400;
+
+}
+
+h6 {
+  font-size: 0.75rem;
+  font-weight: 400;
+
+}
+
+
+
+main {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+
+.none{
+  display: none;
+}
+
+
+section {
+  margin-bottom: 3rem;
+}
+
+
+
+
+
+
+.pendiente{
+  background-color:burlywood;
+  padding: 1rem;
+}
+
+
 
 
 /* ========== Heder - Nav ========== */
 
 
 header {
-  display: flex;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 999;
   background-color: var(--secondary);
   width: 100%;
   height: var(--header-height);
   font-weight:bold;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem;
+  width: inherit;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap:0.5rem
+}
+
+nav a {
+  color: var(--accent-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: opacity 0.3s ease-in-out;
+  line-height: 1;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  opacity: 0.7;
+}
+
+.logo{
+  width: 6rem;
+}
+
+.logo img {
+  border-radius: 4px;
+}
+
+
 
 .menu {
   position: absolute;
@@ -49,13 +159,13 @@ header {
 }
 
 .menu a {
-  font-size: 1.5rem;
-  padding: .5rem 0;
+  padding: .5rem 0.5rem;
+  transition: background 0.4s ease-in-out;
 }
 
 .menu a:hover {
-  background-color: var(--primary);
-  color: var(--secondary);
+  background-color: var(--background);
+  color: var(--text-secondary);
 } 
 
 .menu-btn {
@@ -63,125 +173,182 @@ header {
   background-color: var(--secondary);
   border: 0;
   cursor: pointer;
-  outline: thin solid var(--primary) ;
+  outline: thin solid var(--accent-light) ;
 }
 
 
+/* ========== Home ========== */
 
-
-
-
-
-
-
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.3rem;
-  width: inherit;
-}
-
-nav h1 {
-  color: var(--primary);
-  font-size: 1.6rem;
-  margin: 0;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
+.hero {
+  background-image: url('/hero-election.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: var(--secondary);
+  color: var(--accent-light);
+  height: 45vh;
   display: flex;
   flex-direction: column;
-  gap:0.5rem
+  justify-content: center;
+  align-items: center;
 }
 
-nav a {
-  color: var(--primary);
-  text-decoration: none;
+.hero h1{
+  text-align: center;
+  margin-bottom: 1rem;
+  background-color: var(--text-bg-alpha);
+}
+
+.hero p{
+  font-size: 1.2rem;  
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background-color: var(--text-bg-alpha);
+}
+
+.hero-buttons {
+  display: flex;
+  font-size: 1.1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.hero-buttons a {
+  padding: 0.75rem 1rem;
+  background-color: var(--primary);
+  color: var(--text-secondary);
+  border: 0.125rem solid var(--accent-light);
+  box-shadow: 0 2px var(--background);
+  border-radius: 0.25rem;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out;
+}
+
+.hero-buttons a:active{
+  transform: translateY(2px);
+  box-shadow: 0 1px var(--accent-light);
+  background-color: var(--primary-dark);
+}
+
+.welcome-title h2 {
   font-size: 1.8rem;
-  transition: opacity 0.3s ease-in-out;
-  line-height: 1;
+  font-weight: 500;
+  text-align: center;
 }
 
-nav a:hover {
-  text-decoration: underline;
-  opacity: 0.7;
+.welcome-title p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
 }
 
 
+/* ========== Candidatos ========== */
 
-
-
-
-
-
-main {
-  max-width: 1280px;
-  margin: 1rem auto;
-  padding: 1rem;
+.candidatos {
+  padding: 0.5rem;
 }
 
-section {
+.candidatos h2 {
   margin-bottom: 2rem;
-}
-
-h2 {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-}
-
-.candidato-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: white;
-  margin-bottom: 1rem;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.candidato-card:hover {
-  background-color: #f0f0f0;
-}
-
-.candidato-card h3 {
-  font-size: 1.25rem;
-  margin: 0 0 0.5rem;
+  text-align: center;
 }
 
 form {
+  margin: 1rem 0 1.5rem;
+  border-radius: 20px;
+}
+
+.search-select {
+  width: 100%;
+  border: 2px solid var(--text-primary);
+  border-radius: 20px;
+  padding: 0.25rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.candidato-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 0.8rem;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  border-left: 0.25rem solid var(--primary);
+  margin-bottom: 1rem;
+}
+
+.candidato-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  background-color: var(--accent-light);
+}
+
+.candidato-img {
+  background-image: url("/logo-bandera.jpg");
+  background-color: var(--text-bg-alpha);
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.75rem;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
 }
 
-select, input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+.candidato-img img {
+  border-radius: 50%;
+  width: 45%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.candidato-img img:hover {
+  transform: scale(1.02);
+}
+
+.candidato-card h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+  color: var(--text-secondary);
+}
+
+.candidato-card p {
+  color: var(--text-primary);
+}
+
+.candidato-card p strong {
+  color: var(--secondary);
+}
+
+.candidato-card a {
+  padding: 0.5rem 1rem;
+  border: none;
   border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--tertiary);
+  color: var(--background);
+}
+
+.candidato-card a:hover {
+  background-color: var(--tertiary-dark);
+  transform: translateY(-1px);
+}
+
+.candidato-card a:focus {
+  outline: 2px solid var(--tertiary-dark);
+  outline-offset: 2px;
 }
 
 
 
-/* ========== Site Styles ========== */
 
-.pendiente{
-  background-color:burlywood;
-  padding: 1rem;
-}
-
-
-.error {
-  color: #dc2626;
-  font-size: 0.9rem;
-}
-
-.none{
-  display: none;
-}
 
 
 /* ========== Responsive Enhancements ========== */
@@ -189,14 +356,44 @@ select, input {
 /* ========== Tablet and up ========== */
 @media (min-width: 640px) {
 
+  /* ========== Site Styles Tablet and up ========== */
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.50rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+.candidatos {
+  
+}
+
+/* ========== Heder - Nav Tablet and up ========== */
+
   header {
     position: sticky;
     top: 0;
   }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
+  nav ul {
+    max-width: 70%;
   }
 
   .menu {
@@ -225,10 +422,47 @@ select, input {
     align-items: center;
     text-align: center;
     font-size: 1.4rem;
-  } 
+  }
 
+/* ========== Home Tablet and up ========== */
+
+  .hero {
+    height: 52vh;    
+  }
+
+  .hero h1{
+  text-align: center;
+  }
+
+  .hero p {
+  font-size: 1.6rem;
+  }
+
+  .welcome-title p {
+  font-size: 1.9rem;
+  }
+
+
+  /* ========== Candidatos Tablet and up ========== */
+
+
+
+   form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .presidenciales {
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
  
+
+
 
   .candidato-grid {
     display: grid;
@@ -236,14 +470,12 @@ select, input {
     gap: 1rem;
   }
 
-  form {
-    flex-direction: row;
-    align-items: center;
+  .candidato-card h3 {
+  font-size: 1.7rem;
   }
-
-  select, input {
-    width: 200px;
-  }
+  
+ 
+ 
 
 
 
@@ -254,9 +486,69 @@ select, input {
 
 /* ========== Desktop and up ==========*/
 @media (min-width: 1024px) {
+  
+  /* ========== Site Styles Desktop and up ========== */
+  h1 {
+  font-size: 3rem;
+  }
+
+  h2 {
+  font-size: 2.75rem;
+  }
+
+  h3 {
+  font-size: 2.5rem;
+  }
+
+  h4 {
+  font-size: 2.25rem;
+  }
+
+  h5 {
+  font-size: 2rem;
+  }
+
+h6 {
+  font-size: 1.75rem;
+}
+
+.candidatos {
+
+
+
+}
+
+  /* ========== Heder - Nav Desktop and up ========== */
+
+/* ========== Home Desktop and up ========== */
+
+  .hero h1{
+
+  }
+
+  .hero p {
+  font-size: 2rem;
+  }
+
+
+
+  /* ========== Candidatos desktop ========== */
+
+
+
+
+
+
+
   .candidato-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .candidato-card h3 {
+  font-size: 1.9rem;
+  }
+
+
 
 
 
